@@ -46,20 +46,11 @@ const SearchFilm = () => {
                 name='searchParams'
                 error={Boolean(touched.searchParams && errors.searchParams)}
                 helperText={<ErrorMessage name='searchParams' />}
-                // FormHelperTextProps={{
-                //   className: classes.error,
-                // }}
               />
               <button type='submit'>submit</button>
             </Form>
           )}
         </Formik>
-        {/* <Controls.InputField
-          label='Search for a film'
-          endIcon={<SearchIcon />}
-          fullWidth
-          name='searchParams'
-        /> */}
       </MainContent>
     </Fragment>
   );
