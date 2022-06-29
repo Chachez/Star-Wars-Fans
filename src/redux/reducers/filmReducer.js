@@ -13,6 +13,18 @@ const filmReducer = (state = initialState, action) => {
         ...state,
         searchParams: payload,
       };
+
+    case filmActions.HISTORICAL_SEARCH:
+      return {
+        ...state,
+        historicalSearch: [...state.historicalSearch, payload],
+      };
+
+    case filmActions.FILM_DETAILS:
+      return {
+        ...state,
+        filmDetails: payload,
+      };
     default:
       return state;
   }
