@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSelector, shallowEqual } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import {
   IconButton,
   List,
@@ -10,33 +10,80 @@ import {
 } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ClearIcon from '@mui/icons-material/Clear';
+import { useNavigate } from 'react-router-dom';
+import { useSnackbar } from 'notistack';
 
 import { SearchHistoryFooter } from '../SearchHistoryFooter';
+import { searchFilm } from '../../redux/actions/filmActions';
 import './searchHistory.css';
+import Controls from '../Controls';
 
-const SearchHistory = ({ todos, setTodos }) => {
+const SearchHistory = () => {
+  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [state, setState] = useState({ searchParams: '', open: false });
   const reduxState = useSelector((state) => state.film, shallowEqual);
-  const numberOfResults = reduxState.historicalSearch?.length;
+  const numberOfResults = [
+    ...new Set(
+      reduxState.historicalSearch.map((results) => results.searchParams)
+    ),
+  ];
+
+  const errorNotify = (message) => {
+    enqueueSnackbar(message, {
+      variant: 'error',
+    });
+  };
+
+  const handleSearchFilm = async (searchParams) => {
+    let data = {
+      searchParams: searchParams,
+    };
+    setState({
+      ...state,
+      open: true,
+    });
+    await dispatch(searchFilm(data)).then((res) => {
+      res.data.results.length !== 0 && navigate(`/film/${searchParams}`);
+
+      let errorMsg = 'No results found';
+      res.data.results.length === 0 && errorNotify(errorMsg);
+    });
+    setState({
+      ...state,
+      open: false,
+    });
+  };
+
+  const refinedHistoricalFilmList = [
+    ...new Set(
+      reduxState.historicalSearch.map(
+        (searchParams) => searchParams.searchParams
+      )
+    ),
+  ];
 
   return (
-    <div className='todolist-container'>
-      <div className='todos-container'>
-        {reduxState.historicalSearch.map((searchParams, idx) => (
+    <div className='history-list-container'>
+      <Controls.Loader open={state.open} />
+      <div className='history-container'>
+        {refinedHistoricalFilmList.map((searchParams, idx) => (
           <List>
             <ListItem disablePadding key={idx}>
               <ListItemButton
-                onClick={() => {
-                  console.log('hi');
+                onClick={async () => {
+                  await handleSearchFilm(searchParams);
                 }}
               >
                 <ListItemIcon>
                   <ArrowForwardIcon />
                 </ListItemIcon>
-                <ListItemText primary={searchParams.searchParams} />
+                <ListItemText primary={searchParams} />
               </ListItemButton>
               <IconButton
                 onClick={() => {
-                  console.log(idx);
+                  // console.log(index);
                 }}
               >
                 <ClearIcon />
@@ -46,7 +93,7 @@ const SearchHistory = ({ todos, setTodos }) => {
         ))}
       </div>
       <div>
-        <SearchHistoryFooter numberOfIncompleteTasks={numberOfResults} />
+        <SearchHistoryFooter numberOfIncompleteTasks={numberOfResults.length} />
       </div>
     </div>
   );
