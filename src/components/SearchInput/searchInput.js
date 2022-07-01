@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
@@ -13,7 +13,6 @@ const SearchInput = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
-  const reduxState = useSelector((state) => state, shallowEqual);
   const [state, setState] = useState({
     searchParams: '',
   });
