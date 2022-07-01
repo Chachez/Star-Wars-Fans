@@ -7,9 +7,8 @@ const SearchHistoryFooter = ({ numberOfIncompleteTasks }) => {
     <div className='todo-footer'>
       <p>
         {numberOfIncompleteTasks}{' '}
-        {numberOfIncompleteTasks === 1 ? 'task' : 'tasks'} left
+        {numberOfIncompleteTasks === 1 ? 'result' : 'results'} searched
       </p>
-      <Link to='/followers'>Followers</Link>
     </div>
   );
 };

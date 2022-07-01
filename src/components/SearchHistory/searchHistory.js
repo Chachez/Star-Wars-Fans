@@ -1,46 +1,52 @@
 import React from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
+import {
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+} from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ClearIcon from '@mui/icons-material/Clear';
+
 import { SearchHistoryFooter } from '../SearchHistoryFooter';
 import './searchHistory.css';
 
 const SearchHistory = ({ todos, setTodos }) => {
-  const updateTask = (id) => {
-    let updatedTasks = todos.map((todo) => {
-      if (todo.id === id) {
-        todo.completed = !todo.completed;
-        return todo;
-      } else {
-        return todo;
-      }
-    });
-    setTodos(updatedTasks);
-  };
-
-  const calcNumberOfIncompletedTasks = () => {
-    let count = 0;
-    todos.forEach((todo) => {
-      if (!todo.completed) count++;
-    });
-    return count;
-  };
+  const reduxState = useSelector((state) => state.film, shallowEqual);
+  const numberOfResults = reduxState.historicalSearch?.length;
 
   return (
     <div className='todolist-container'>
       <div className='todos-container'>
-        <div>
-          {todos.map((todo, index) => (
-            <div
-              className={`todo-item ${todo.completed && 'todo-item-active'}`}
-              onClick={() => updateTask(todo.id)}
-            >
-              {todo.task}
-            </div>
-          ))}
-        </div>
+        {reduxState.historicalSearch.map((searchParams, idx) => (
+          <List>
+            <ListItem disablePadding key={idx}>
+              <ListItemButton
+                onClick={() => {
+                  console.log('hi');
+                }}
+              >
+                <ListItemIcon>
+                  <ArrowForwardIcon />
+                </ListItemIcon>
+                <ListItemText primary={searchParams.searchParams} />
+              </ListItemButton>
+              <IconButton
+                onClick={() => {
+                  console.log(idx);
+                }}
+              >
+                <ClearIcon />
+              </IconButton>
+            </ListItem>
+          </List>
+        ))}
       </div>
       <div>
-        <SearchHistoryFooter
-          numberOfIncompleteTasks={calcNumberOfIncompletedTasks()}
-        />
+        <SearchHistoryFooter numberOfIncompleteTasks={numberOfResults} />
       </div>
     </div>
   );
