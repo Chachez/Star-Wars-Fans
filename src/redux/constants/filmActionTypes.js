@@ -1,5 +1,0 @@
-export const filmActions = {
-  SEARCH: 'SEARCH',
-  FILM_DETAILS: 'FILM_DETAILS',
-  HISTORICAL_SEARCH: 'HISTORICAL_SEARCH',
-};
