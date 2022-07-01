@@ -1,37 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useSelector, shallowEqual } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { Tooltip, Fab } from '@mui/material';
+
 import './searchedFilmDetails.css';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Grid } from '@mui/material';
 
 export default function SearchedFilmDetails() {
-  const [followers, setFollowers] = useState([]);
-
-  useEffect(() => {
-    const fetchFollowers = async () => {
-      const { data } = await axios.get('https://randomuser.me/api/?results=5');
-      setFollowers(data.results);
-    };
-
-    fetchFollowers();
-  }, []);
+  const navigate = useNavigate();
+  const reduxState = useSelector((state) => state.film, shallowEqual);
 
   return (
-    <div className='followerslist-container'>
+    <div className='film-list-container'>
       <div>
-        {followers.map((follower, index) => (
-          <div className='follower-item' data-testid={`follower-item-${index}`}>
-            <img src={follower.picture.large} alt='pic' />
-            <div className='followers-details'>
-              <div className='follower-item-name'>
-                <h4>{follower.name.first}</h4> <h4>{follower.name.last}</h4>
+        {reduxState.filmDetails.results?.map((details, index) => (
+          <div className='film-item' data-testid={`follower-item-${index}`}>
+            <div className='film-details'>
+              <div className='film-item-name'>
+                <h4>Movie Description</h4>
               </div>
-              <p>{follower.login.username}</p>
+              <p>{details.opening_crawl}</p>
+              <Grid container spacing={2}>
+                <Grid item lg={4}>
+                  <h5>Release Date</h5>
+                  <p>{moment(details.release_date).format('DD-MMM-YYYY')}</p>
+                </Grid>
+                <Grid item lg={4}>
+                  <h4>Director</h4> <p>{details.director}</p>
+                </Grid>
+                <Grid item lg={4}>
+                  <h4>Producer</h4>
+                  <p>{details.producer}</p>
+                </Grid>
+              </Grid>
             </div>
           </div>
         ))}
       </div>
-      <div className='todo-footer'>
-        <Link to='/'>Go Back</Link>
+
+      <div className='detail-footer'>
+        <Tooltip title='Back' aria-label='back'>
+          <Fab color='default' onClick={() => navigate('/')}>
+            <ArrowBackIcon />
+          </Fab>
+        </Tooltip>
       </div>
     </div>
   );
