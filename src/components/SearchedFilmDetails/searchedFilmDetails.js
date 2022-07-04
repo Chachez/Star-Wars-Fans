@@ -8,7 +8,7 @@ import { Tooltip, Fab } from '@mui/material';
 import './searchedFilmDetails.css';
 import { Grid } from '@mui/material';
 
-export default function SearchedFilmDetails() {
+const SearchedFilmDetails = () => {
   const navigate = useNavigate();
   const reduxState = useSelector((state) => state.film, shallowEqual);
 
@@ -16,7 +16,7 @@ export default function SearchedFilmDetails() {
     <div className='film-list-container'>
       <div>
         {reduxState.filmDetails.results?.map((details, index) => (
-          <div className='film-item' data-testid={`follower-item-${index}`}>
+          <div className='film-item' data-testid={`film-item-${index}`}>
             <div className='film-details'>
               <div className='film-item-name'>
                 <h4>Movie Description</h4>
@@ -49,4 +49,6 @@ export default function SearchedFilmDetails() {
       </div>
     </div>
   );
-}
+};
+
+export default SearchedFilmDetails;

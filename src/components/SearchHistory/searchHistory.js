@@ -93,7 +93,7 @@ const SearchHistory = () => {
         ))}
       </div>
       <div>
-        <SearchHistoryFooter numberOfIncompleteTasks={numberOfResults.length} />
+        <SearchHistoryFooter numberOfSearchResults={numberOfResults.length} />
       </div>
     </div>
   );

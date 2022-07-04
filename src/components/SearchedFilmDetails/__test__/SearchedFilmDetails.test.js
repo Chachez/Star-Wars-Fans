@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { SearchedFilmDetails } from '../../SearchedFilmDetails';
 
-const MockFollowersList = () => {
+const MockFilmsList = () => {
   return (
     <BrowserRouter>
       <SearchedFilmDetails />
@@ -10,7 +10,7 @@ const MockFollowersList = () => {
   );
 };
 
-describe('FollowersList', () => {
+describe('FilmsList', () => {
   beforeEach(() => {
     // console.log("RUNS BEFORE EACH TEST")
     jest.mock('../../../__mocks__/axios');
@@ -29,15 +29,15 @@ describe('FollowersList', () => {
   // })
 
   it('should fetch and render input element', async () => {
-    render(<MockFollowersList />);
-    const followerDivElement = await screen.findByTestId(`follower-item-0`);
-    expect(followerDivElement).toBeInTheDocument();
+    render(<MockFilmsList />);
+    const filmDivElement = await screen.findByTestId(`film-item-0`);
+    expect(filmDivElement).toBeInTheDocument();
   });
 
   it('should fetch and render input element', async () => {
-    render(<MockFollowersList />);
+    render(<MockFilmsList />);
 
-    const followerDivElement = await screen.findByTestId(`follower-item-0`);
-    expect(followerDivElement).toBeInTheDocument();
+    const filmDivElement = await screen.findByTestId(`film-item-0`);
+    expect(filmDivElement).toBeInTheDocument();
   });
 });

@@ -1,25 +1,25 @@
 import { render, screen } from '@testing-library/react';
-import { searchHistoryFooter } from '../../SearchHistoryFooter';
+import { SearchHistoryFooter } from '../../SearchHistoryFooter';
 import { BrowserRouter } from 'react-router-dom';
 
-const MockTodoFooter = ({ numberOfIncompleteTasks }) => {
+const MockTodoFooter = ({ numberOfSearchResults }) => {
   return (
     <BrowserRouter>
-      <searchHistoryFooter numberOfIncompleteTasks={numberOfIncompleteTasks} />
+      <SearchHistoryFooter numberOfSearchResults={numberOfSearchResults} />
     </BrowserRouter>
   );
 };
 
-describe('TodoFooter', () => {
-  it('should render the correct amount of incomplete tasks', () => {
-    render(<MockTodoFooter numberOfIncompleteTasks={5} />);
-    const pElement = screen.getByText(/5 tasks left/i);
+describe('FilmFooter', () => {
+  it('should render the correct amount of searched results', () => {
+    render(<MockTodoFooter numberOfSearchResults={2} />);
+    const pElement = screen.getByText(/2 results searched/i);
     expect(pElement).toBeInTheDocument();
   });
 
-  it('should render "task" when the number of incomplete tasks is one', () => {
-    render(<MockTodoFooter numberOfIncompleteTasks={1} />);
-    const pElement = screen.getByText(/1 task left/i);
+  it('should render "result" when the number of searched result is one', () => {
+    render(<MockTodoFooter numberOfSearchResults={1} />);
+    const pElement = screen.getByText(/1 result searched/i);
     expect(pElement).toBeInTheDocument();
   });
 });
@@ -27,7 +27,7 @@ describe('TodoFooter', () => {
 // it('p element should be truthy when the number of incomplete tasks is one', () => {
 //   render(
 //       <MockTodoFooter
-//         numberOfIncompleteTasks={1}
+//         numberOfSearchResults={1}
 //       />
 //   );
 //   const pElement = screen.getByText(/1 task left/i);
@@ -37,7 +37,7 @@ describe('TodoFooter', () => {
 // it('"task" should be visible when the number of incomplete tasks is one', () => {
 //   render(
 //       <MockTodoFooter
-//         numberOfIncompleteTasks={1}
+//         numberOfSearchResults={1}
 //       />
 //   );
 //   const pElement = screen.getByText(/1 task left/i);
@@ -47,7 +47,7 @@ describe('TodoFooter', () => {
 // it('should contain p tag with correct text', () => {
 //   render(
 //       <MockTodoFooter
-//         numberOfIncompleteTasks={1}
+//         numberOfSearchResults={1}
 //       />
 //   );
 //   const pElement = screen.getByText(/1 task left/i);
@@ -57,7 +57,7 @@ describe('TodoFooter', () => {
 // it('should render correct text content', () => {
 //   render(
 //       <MockTodoFooter
-//         numberOfIncompleteTasks={1}
+//         numberOfSearchResults={1}
 //       />
 //   );
 //   const pElement = screen.getByText(/1 task left/i);
@@ -67,7 +67,7 @@ describe('TodoFooter', () => {
 // it('should render correct text content', () => {
 //   render(
 //       <MockTodoFooter
-//         numberOfIncompleteTasks={1}
+//         numberOfSearchResults={1}
 //       />
 //   );
 //   const pElement = screen.getByText(/1 task left/i);
@@ -77,7 +77,7 @@ describe('TodoFooter', () => {
 // it('should render correct text content', () => {
 //   render(
 //       <MockTodoFooter
-//         numberOfIncompleteTasks={1}
+//         numberOfSearchResults={1}
 //       />
 //   );
 //   const pElement = screen.getByText(/1 task left/i);

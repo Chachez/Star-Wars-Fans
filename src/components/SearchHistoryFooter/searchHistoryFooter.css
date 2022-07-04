@@ -1,14 +1,14 @@
-.todo-footer {
+.film-footer {
     display: flex;
     justify-content: space-between;
 }
 
-.todo-footer p {
+.film-footer p {
     font-weight: 600;
     color: grey
 }
 
-.todo-footer a {
+.film-footer a {
     font-weight: 600;
     color: grey;
     text-decoration: none;
