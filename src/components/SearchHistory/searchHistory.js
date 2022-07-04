@@ -24,7 +24,7 @@ const SearchHistory = () => {
   const navigate = useNavigate();
   const [state, setState] = useState({ searchParams: '', open: false });
   const reduxState = useSelector((state) => state.film, shallowEqual);
-  const numberOfResults = [
+  const numberOfSearchedFilms = [
     ...new Set(
       reduxState.historicalSearch.map((results) => results.searchParams)
     ),
@@ -93,7 +93,9 @@ const SearchHistory = () => {
         ))}
       </div>
       <div>
-        <SearchHistoryFooter numberOfIncompleteTasks={numberOfResults.length} />
+        <SearchHistoryFooter
+          numberOfSearchedFilms={numberOfSearchedFilms.length}
+        />
       </div>
     </div>
   );
