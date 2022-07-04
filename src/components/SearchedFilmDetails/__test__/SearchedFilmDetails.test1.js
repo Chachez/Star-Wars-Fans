@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
-import { SearchedFilmDetails } from '../../SearchedFilmDetails';
+import { SearchedFilmDetails } from '..';
 
 const MockFollowersList = () => {
   return (

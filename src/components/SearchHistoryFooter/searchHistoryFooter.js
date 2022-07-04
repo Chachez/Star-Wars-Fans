@@ -1,12 +1,12 @@
 import React from 'react';
 import './searchHistoryFooter.css';
 
-const SearchHistoryFooter = ({ numberOfIncompleteTasks }) => {
+const SearchHistoryFooter = ({ numberOfSearchedFilms }) => {
   return (
     <div className='todo-footer'>
       <p>
-        {numberOfIncompleteTasks}{' '}
-        {numberOfIncompleteTasks === 1 ? 'result' : 'results'} searched
+        {numberOfSearchedFilms} {numberOfSearchedFilms === 1 ? 'film' : 'films'}{' '}
+        searched
       </p>
     </div>
   );
