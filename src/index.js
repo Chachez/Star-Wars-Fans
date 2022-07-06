@@ -9,8 +9,8 @@ import './index.css';
 import App from './App';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <Router>
+  <Router>
+    <React.StrictMode>
       <SnackbarProvider
         anchorOrigin={{
           vertical: 'top',
@@ -22,8 +22,8 @@ ReactDOM.render(
       >
         <App />
       </SnackbarProvider>
-    </Router>
-  </React.StrictMode>,
+    </React.StrictMode>
+  </Router>,
   document.getElementById('root')
 );
 
