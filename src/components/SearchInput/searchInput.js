@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import _ from 'lodash';
 
 import {
   searchFilm,
@@ -27,7 +28,7 @@ const SearchInput = () => {
   const handleSearchFilm = async (e) => {
     e.preventDefault();
     let data = {
-      searchParams: state.searchParams,
+      searchParams: _.startCase(_.toLower(state.searchParams)),
     };
     setState({
       ...state,
@@ -45,6 +46,7 @@ const SearchInput = () => {
     setState({
       ...state,
       open: false,
+      searchParams: '',
     });
   };
 
@@ -55,7 +57,7 @@ const SearchInput = () => {
         className='input'
         value={state.searchParams}
         onChange={(e) => setState({ ...state, searchParams: e.target.value })}
-        placeholder='Add a new task here...'
+        placeholder='Search a film'
       />
       <button
         className='add-btn'

@@ -9,7 +9,6 @@ import {
   ListItemText,
 } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import ClearIcon from '@mui/icons-material/Clear';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
@@ -81,13 +80,6 @@ const SearchHistory = () => {
                 </ListItemIcon>
                 <ListItemText primary={searchParams} />
               </ListItemButton>
-              <IconButton
-                onClick={() => {
-                  // console.log(index);
-                }}
-              >
-                <ClearIcon />
-              </IconButton>
             </ListItem>
           </List>
         ))}
