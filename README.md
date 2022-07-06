@@ -2,6 +2,8 @@
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/34bcf6c8-0204-48d5-8bee-9cb54c5aae9e/deploy-status)](https://app.netlify.com/sites/chachez-star-wars-films/deploys)
 
+Check out the LIVE DEMO at(https://chachez-star-wars-films.netlify.app/) 
+
 ## Get Started with this Project
 
 

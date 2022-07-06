@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import {
-  IconButton,
   List,
   ListItem,
   ListItemButton,
